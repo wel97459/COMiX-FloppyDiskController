@@ -1,0 +1,50 @@
+Name     FDC_F9;
+PartNo   00 ;
+Date     8/11/2023 ;
+Revision 01 ;
+Designer Engineer ;
+Company  none ;
+Assembly None ;
+Location  ;
+Device   g22v10 ;
+
+
+
+/**  Inputs  **/
+Pin 2 = F4_Q2;
+Pin 3 = F4_Q3;
+Pin 4 = F4_Q4;
+Pin 5 = F4_Q5;
+
+Pin 6 = FDC_DRQ;
+Pin 7 = FDC_IRQ;
+Pin 8 = Q;
+PinNode [9..11] = [N2..0];
+Pin 13 = TPB;
+Pin 14 = MRD;
+
+/**  Outputs  **/
+Pin 23 = D0;
+Pin 22 = EF4;
+Pin 21 = FD_DS0;
+Pin 20 = FD_DS1;
+Pin 19 = FD_SIDE;
+Pin 18 = Latch;
+Pin 17 = NE2;
+
+D0 = FDC_IRQ;
+D0.OE = Q & MRD & !N0 & N1 & !N2;
+
+EF4 = FDC_DRQ;
+EF4.OE = F4_Q4;
+
+FD_DS0 = !F4_Q2;
+FD_DS1 = !F4_Q3;
+FD_SIDE = !F4_Q5;
+
+FD_DS0.oe = F4_Q2;
+FD_DS1.oe = F4_Q3;
+FD_SIDE.oe = F4_Q5;
+
+NE2 = N0 # !N1 # N2;
+Latch = !Q # !TPB # NE2 # MRD;

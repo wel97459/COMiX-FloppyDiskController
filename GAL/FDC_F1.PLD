@@ -1,0 +1,38 @@
+Name       FDC_F1;
+Partno     XXXXX;
+Date       08/10/23;
+Revision   01;
+Designer   Winston;
+Company    None;
+Assembly   None;
+Location   Home;
+Device     G22V10;
+
+/**  Inputs  **/
+
+Pin 1 = CLK;
+
+PinNode [9..2] = [A0..7];
+Pin 10 = A14_;
+Pin 11 = A15_;
+Pin 13 = MRD;
+/**  Outputs  **/
+
+Pin 14 = R_OE;
+Pin 15 = OR_F7;
+Pin 22 = AND_F6;
+Pin 23 = OR_F10A;
+
+PinNode [16..21] = [Q0..5];
+
+/** Declarations and Intermediate Variable Definitions **/
+
+[Q0..5].d = [A0..5];
+
+AND_F6 = Q2 & Q3 & Q0 & A14_ & A15_ & A4 & A6 & A7;
+OR_F10A = Q5 # A14_ # A15_ # MRD;
+OR_F7 = !AND_F6 # Q5 # Q4 # Q1 # A5 # MRD;
+
+R_OE = OR_F10A & OR_F7;
+
+/**  Logic Equations  **/

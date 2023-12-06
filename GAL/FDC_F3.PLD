@@ -1,0 +1,32 @@
+Name     FDC_F3;
+PartNo   00 ;
+Date     8/11/2023 ;
+Revision 01 ;
+Designer Engineer ;
+Company  none ;
+Assembly None ;
+Location  ;
+Device   g22v10 ;
+
+
+
+/**  Inputs  **/
+Pin 1 = CLK;
+PinNode [2..7] = [D0..5];
+Pin 8 = Q;
+Pin 9 = NE2;
+
+Pin 13 = TPB;
+Pin 14 = MRD;
+Pin 17 = Reset;
+
+/**  Outputs  **/
+Pin 15 = FDC_CS;
+Pin 16 = FDC_RW;
+PinNode [23..18] = [Q0..5];
+
+[Q0..5].d = [D0..5];
+[Q0..5].ar = !Reset;
+
+FDC_CS = NE2 # Q;
+FDC_RW = MRD # !TPB # NE2;
